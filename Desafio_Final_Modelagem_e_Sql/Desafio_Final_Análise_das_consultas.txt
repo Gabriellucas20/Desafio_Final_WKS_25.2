@@ -1,0 +1,62 @@
+Análise de Clientes (Consulta de Agregação)
+Consulta: SELECT data_cadastro, COUNT(cpf) FROM CLIENTE GROUP BY data_cadastro;
+
+O que mostrou: Esta consulta revela o número de novos clientes cadastrados em cada dia.
+
+Insights Práticos: Permite identificar os dias de maior fluxo de cadastro, ajudando a concessionária a entender os períodos de pico de interesse e a planejar campanhas de marketing ou alocar mais atendentes nessas datas.
+
+2. Análise de Funcionários (Consulta de Agregação)
+Consulta: SELECT cargo, AVG(salario) FROM FUNCIONARIO GROUP BY cargo;
+
+O que mostrou: Calcula o salário médio dos funcionários para cada cargo.
+
+Insights Práticos: Oferece uma visão clara da política salarial. A gerência de RH pode usar esses dados para garantir que os salários sejam competitivos e justos entre os diferentes cargos, além de planejar o orçamento.
+
+3. Análise de Veículos (Consulta de Agregação)
+Consulta: SELECT status, COUNT(id_veiculo) FROM VEICULO GROUP BY status;
+
+O que mostrou: Apresenta a contagem de veículos para cada status (disponível, alugado, em manutenção).
+
+Insights Práticos: Fornece um panorama instantâneo da frota. Se o número de veículos "disponíveis" for baixo, a empresa pode considerar novas aquisições. Se muitos estiverem "em manutenção", a gestão pode precisar otimizar o processo do setor.
+
+4. Análise de Seguros (Consulta de Agregação)
+Consulta: SELECT status_plano, AVG(franquia) FROM SEGURO GROUP BY status_plano;
+
+O que mostrou: Mostra o valor médio da franquia para cada status de plano de seguro (Ativo, Inativo).
+
+Insights Práticos: Ajuda a avaliar a atratividade dos planos. Pode-se verificar se os planos mais populares têm franquias mais baixas e usar essa informação para criar novas ofertas.
+
+5. Análise de Aluguéis (Consulta de Agregação)
+Consulta: SELECT status, SUM(valor_total) FROM ALUGUEL GROUP BY status;
+
+O que mostrou: Soma a receita total de aluguéis por status (ativo, finalizado, atrasado).
+
+Insights Práticos: Uma métrica financeira essencial. A soma do valor "finalizado" e "ativo" representa a receita total. O valor "atrasado" é um indicador de inadimplência, sinalizando a necessidade de ação da equipe de cobrança.
+
+6. Análise de Pagamentos (Consulta de Agregação)
+Consulta: SELECT metodo, COUNT(id_pagamento) FROM PAGAMENTO GROUP BY metodo;
+
+O que mostrou: Conta a quantidade de pagamentos realizados para cada método (Cartão, PIX, Boleto).
+
+Insights Práticos: Revela a preferência dos clientes. Se o PIX for o método mais utilizado, a concessionária pode investir em melhorias de seu sistema de pagamento instantâneo ou oferecer incentivos para seu uso, reduzindo custos de transação.
+
+7. Análise de Manutenção (Consulta de Agregação)
+Consulta: SELECT tipo_manutencao, SUM(custo) FROM MANUTENCAO GROUP BY tipo_manutencao;
+
+O que mostrou: Soma o custo total de manutenção para cada tipo de serviço (Preventiva ou Corretiva).
+
+Insights Práticos: Permite comparar os custos entre manutenção preventiva e corretiva. Se o custo corretivo for muito alto, pode ser um sinal de que o investimento em manutenção preventiva precisa ser aumentado para evitar problemas futuros e mais caros.
+
+8. Análise de Aluguéis por Cliente (Consulta com JOIN)
+Consulta: SELECT C.nome, A.data_inicio, A.data_fim, V.modelo, V.placa FROM ALUGUEL AS A INNER JOIN CLIENTE AS C ON A.cpf_cliente = C.cpf INNER JOIN VEICULO AS V ON A.id_veiculo = V.placa;
+
+O que mostrou: Conecta o cliente ao veículo alugado, fornecendo um histórico completo de locações por pessoa.
+
+Insights Práticos: Ajuda a criar perfis de clientes e a identificar quais modelos de veículos são mais procurados. Com isso, a equipe de marketing pode criar promoções direcionadas e a de gestão pode planejar a renovação da frota com base na demanda.
+
+9. Análise de Pagamentos e Funcionários (Consulta com JOIN)
+Consulta: SELECT P.id_pagamento, P.valor, F.nome, V.modelo FROM PAGAMENTO AS P INNER JOIN ALUGUEL AS A ON P.id_aluguel = A.id_aluguel INNER JOIN FUNCIONARIO AS F ON A.cpf_funcionario = F.cpf INNER JOIN VEICULO AS V ON A.id_veiculo = V.placa;
+
+O que mostrou: Associa cada pagamento ao funcionário que realizou o aluguel e ao veículo correspondente.
+
+Insights Práticos: Essencial para controle financeiro e auditoria. Permite avaliar a produtividade dos funcionários com base no valor e na quantidade de aluguéis que eles fecham. Também ajuda a rastrear a jornada completa de cada transação, desde o início do aluguel até a sua finalização com o pagamento.
