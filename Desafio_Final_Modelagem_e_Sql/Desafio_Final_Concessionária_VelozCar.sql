@@ -6,7 +6,7 @@ Use Concessionária_VelozCar;
 
 --- Criando as Tabelas do banco ---
 create table Cliente(
-	CPF int primary key auto_increment,
+	CPF varchar(14) primary key,
     Nome varchar(255)not null,
     endereco varchar(255)not null,
     Data_Nascimento date not null,
@@ -16,27 +16,29 @@ create table Cliente(
     Sexo enum('Feminino','Masculino','Outros') not null
 );
 
+select * from cliente;
+
 --- Inserindo os dados na tabela Cliente ---
 INSERT INTO Cliente (cpf, nome, endereco, data_nascimento, sexo, cadastro_do_cliente, email, telefone) VALUES
-('543.210.987-65', 'Alice Oliveira', 'Rua das Palmeiras, 75B', '1992-03-21', 'Feminino', '2024-05-10', 'alice.o@email.com', '(83) 98765-1234'),
-('987.654.321-09', 'Bruno Castro', 'Avenida Marechal, 123', '1985-08-14', 'Masculino', '2024-05-15', 'bruno_c@email.com', '(83) 99876-5432'),
-('123.456.789-01', 'Clara Nunes', 'Travessa da Felicidade, 8', '1998-12-05', 'Feminino', '2024-05-20', 'cnunes@email.com', '(83) 91234-5678'),
-('456.789.012-34', 'Daniel Costa', 'Rua da Esperança, 333', '1979-01-28', 'Masculino', '2024-05-25', 'danielcosta@email.com', '(83) 90987-6543'),
-('789.012.345-67', 'Fernanda Guedes', 'Rua Principal, 567', '1991-07-09', 'Outros', '2024-06-01', 'f.guedes@email.com', '(83) 97654-3210'),
-('234.567.890-12', 'Gabriel Ramos', 'Rua São Judas, 101A', '1988-10-30', 'Masculino', '2024-06-05', 'gabriel_r@email.com', '(83) 96543-2109'),
-('567.890.123-45', 'Heloísa Dantas', 'Avenida Sul, 888', '1993-04-19', 'Feminino', '2024-06-10', 'helod@email.com', '(83) 95432-1098'),
-('890.123.456-78', 'Ivan Peixoto', 'Rua da Amizade, 22B', '1980-06-02', 'Masculino', '2024-06-15', 'ivan.peixoto@email.com', '(83) 94321-0987'),
-('345.678.901-23', 'Juliana Torres', 'Avenida Litoral, 900', '1995-09-29', 'Feminino', '2024-06-20', 'j.torres@email.com', '(83) 93210-9876'),
-('678.901.234-56', 'Lucas Rocha', 'Rua Sete de Setembro, 55', '1987-11-17', 'Masculino', '2024-06-25', 'lucasrocha@email.com', '(83) 92109-8765');
+('543.210.987-65', 'Alice Oliveira', 'Rua das Palmeiras, 75B', '1992-03-21', 'Feminino', '2024-05-10', 'alice.o@email.com', '(83)98765-1234'),
+('987.654.321-09', 'Bruno Castro', 'Avenida Marechal, 123', '1985-08-14', 'Masculino', '2024-05-15', 'bruno_c@email.com', '(83)99876-5432'),
+('123.456.789-01', 'Clara Nunes', 'Travessa da Felicidade, 8', '1998-12-05', 'Feminino', '2024-05-20', 'cnunes@email.com', '(83)91234-5678'),
+('456.789.012-34', 'Daniel Costa', 'Rua da Esperança, 333', '1979-01-28', 'Masculino', '2024-05-25', 'danielcosta@email.com', '(83)90987-6543'),
+('789.012.345-67', 'Fernanda Guedes', 'Rua Principal, 567', '1991-07-09', 'Outros', '2024-06-01', 'f.guedes@email.com', '(83)97654-3210'),
+('234.567.890-12', 'Gabriel Ramos', 'Rua São Judas, 101A', '1988-10-30', 'Masculino', '2024-06-05', 'gabriel_r@email.com', '(83)96543-2109'),
+('567.890.123-45', 'Heloísa Dantas', 'Avenida Sul, 888', '1993-04-19', 'Feminino', '2024-06-10', 'helod@email.com', '(83)95432-1098'),
+('890.123.456-78', 'Ivan Peixoto', 'Rua da Amizade, 22B', '1980-06-02', 'Masculino', '2024-06-15', 'ivan.peixoto@email.com', '(83)94321-0987'),
+('345.678.901-23', 'Juliana Torres', 'Avenida Litoral, 900', '1995-09-29', 'Feminino', '2024-06-20', 'j.torres@email.com', '(83)93210-9876'),
+('678.901.234-56', 'Lucas Rocha', 'Rua Sete de Setembro, 55', '1987-11-17', 'Masculino', '2024-06-25', 'lucasrocha@email.com', '(83)92109-8765');
 
 
 create table Funcionario(
-	CPF int primary key auto_increment,
+	CPF varchar(14) primary key,
     Nome varchar(255)not null,
     Cargo varchar(50)not null,
     Data_Nascimento date not null,
     Data_contratacao date not null,
-    Telefone varchar(14)not null,
+    Telefone varchar(15)not null,
     Email varchar(255) unique not null,
     Sexo enum('Feminino','Masculino','Outros') not null,
     Salario decimal(10,2) not null
@@ -59,10 +61,12 @@ create table Veiculo(
     Cor varchar(50)not null,
     Ano_De_Fabricacao int(4) not null,
     valor_Da_Diaria decimal(10,2) not null,
-    status	enum('disponível','alugado','em manutenção')not null,
+    status	enum('disponível','alugado','manutenção')not null,
     Quilometragem_atual	int not null,
     Data_Ultima_Revisao date not null
 );
+
+select * from veiculo;
 
 --- Alterando a tabela Veiculo no atributo Status ---
 alter table veiculo modify column status enum('disponível','alugado','manutenção')not null;
@@ -73,7 +77,7 @@ INSERT INTO Veiculo (placa, modelo, cor, ano_de_fabricacao, valor_da_diaria, sta
 ('OPQ4R56', 'Volkswagen Virtus', 'Cinza', 2022, 130.00, 'alugado', 22000, '2024-09-01'),
 ('RST7V89', 'Chevrolet Tracker', 'Vermelho', 2023, 180.00, 'disponível', 15000, '2024-09-05'),
 ('UVW1X23', 'Nissan Kicks', 'Azul', 2021, 150.00, 'disponível', 38000, '2024-08-20'),
-('XYZ4A56', 'Honda Fit', 'Prata', 2020, 110.00, 'em manutenção', 55000, '2024-09-12'),
+('XYZ4A56', 'Honda Fit', 'Prata', 2020, 110.00, 'manutenção', 55000, '2024-09-12'),
 ('MNO7B89', 'Hyundai Creta', 'Preto', 2023, 175.00, 'disponível', 12000, '2024-09-10'),
 ('JKL1C23', 'Toyota Yaris', 'Branco', 2022, 140.00, 'alugado', 28000, '2024-08-28'),
 ('PQR4D56', 'Ford EcoSport', 'Verde', 2021, 160.00, 'disponível', 45000, '2024-07-15'),
@@ -100,8 +104,8 @@ INSERT INTO Seguro (nome_plano, cobertura, franquia, valor_mensal, status_plano)
 
 create table Aluguel(
 	ID_aluguel int primary key auto_increment,
-	CPF_Cliente	int not null,
-	CPF_Funcionario	int not null,
+	CPF_Cliente	varchar(14) not null,
+	CPF_Funcionario	varchar(14) not null,
 	id_veiculo varchar(7) not null,
 	id_seguro int not null,
 	Data_inicio	date not null,
@@ -177,7 +181,7 @@ INSERT INTO Manutencao (id_veiculo, descricao_do_servico, quilometragem_veiculo,
 ('MNO7B89', 'Revisão de rotina', 12000, 350.00, '2024-09-10', 'Preventiva', 'Thiago Lima', 'Sem problemas encontrados.');
 
 --- 2 atualizações (UPDATE) ---
-update veiculo set status = 'Ativo' where Placa = 'XYZ4A56';
+update veiculo set status = 'Disponivel' where Placa = 'XYZ4A56';
 
 update aluguel set valor_total = 1350.00 where id_aluguel = 5;
 
@@ -218,4 +222,4 @@ INNER JOIN
 INNER JOIN
     FUNCIONARIO AS F ON A.cpf_funcionario = F.cpf
 INNER JOIN
-    VEICULO AS V ON A.id_veiculo = V.placa; --- Tabela PAGAMENTO/ALUGUEL/FUNCIONARIO/VEICULO ---
+    VEICULO AS V ON A.id_veiculo = V.placa; --- Tabela PAGAMENTO/ALUGUEL/FUNCIONARIO/VEICULO ---update veiculo set status = 'Ativo' where Placa = 'XYZ4A56'
